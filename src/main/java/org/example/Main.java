@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         int[] nums = {3, 1, 5, 2, 1, 4};
-        insertionSort(nums);       // {1, 1, 2, 3, 4, 5}
+        bubbleSort(nums, true);       // {1, 1, 2, 3, 4, 5}
 
         System.out.println(Arrays.toString(nums));
     }
@@ -31,19 +31,27 @@ public class Main {
     1123      | 3
      */
 
+    public static void bubbleSort(int[] nums) {
+        bubbleSort(nums, true);
+    }
+    
     /**
      * Sorts an array by comparing adjascent elements and swapping if in wrong order
      *
      * @param nums the input array to sort
      */
-    public static void bubbleSort(int[] nums) {
+    public static void bubbleSort(int[] nums, boolean ascending) {
         for (int i = 0; i < nums.length - 1; i++) {
-            for (int j = 0; j < nums.length - 1; j++) {
-                if (nums[j] > nums[j + 1]) {
+            for (int j = 0; j < nums.length - 1 - i; j++) {
+                boolean condition = ascending
+                        ? nums[j] > nums[j + 1]
+                        : nums[j] < nums[j + 1];
+                if (condition) {
                     // swap
                     int temp = nums[j];
                     nums[j] = nums[j + 1];
                     nums[j + 1] = temp;
+
                 }
             }
         }
