@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         int[] nums = {3, 1, 5, 2, 1, 4};
-        selectionSort(nums);       // {1, 1, 2, 3, 4, 5}
+        insertionSort(nums);       // {1, 1, 2, 3, 4, 5}
 
         System.out.println(Arrays.toString(nums));
     }
@@ -33,11 +33,12 @@ public class Main {
 
     /**
      * Sorts an array by comparing adjascent elements and swapping if in wrong order
+     *
      * @param nums the input array to sort
      */
-    public static void bubbleSort(int[]nums) {
-        for(int i = 0; i < nums.length - 1; i++) {
-            for(int j = 0; j < nums.length - 1; j++) {
+    public static void bubbleSort(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = 0; j < nums.length - 1; j++) {
                 if (nums[j] > nums[j + 1]) {
                     // swap
                     int temp = nums[j];
@@ -59,9 +60,10 @@ public class Main {
 
     /**
      * Sorts an array by reoeatedly finding the minimum value from unsorted  portion and swapping with first element of unsorted
-     * @param nums
+     *
+     * @param nums the input array to sort
      */
-    public static void selectionSort(int [] nums){
+    public static void selectionSort(int[] nums) {
         for (int i = 0; i < nums.length - 1; i++) {
             int minIdx = i;
             for (int j = i + 1; j < nums.length; j++) {
@@ -74,6 +76,32 @@ public class Main {
             nums[i] = nums[minIdx];
             nums[minIdx] = temp;
         }
+    }
 
+    /*
+    3       15214
+    1       35214
+    13      5214
+    123     513
+    1123    53
+    11234   5
+    112345
+     */
+
+    /**
+     * Sorts an array by iteratively building a sorted array one element at a time
+     *
+     * @param nums the input array to sort
+     */
+    public static void insertionSort(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            int key = nums[i];
+            int j = i - 1;
+            while (j >= 0 && nums[j] > key) {
+                nums[j + 1] = nums[j];
+                j--;
+            }
+            nums[j + 1] = key;
+        }
     }
 }
